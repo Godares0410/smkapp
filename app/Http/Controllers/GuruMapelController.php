@@ -13,14 +13,10 @@ class GuruMapelController extends Controller
 {
     public function index()
     {
-        $gurumapel = DB::table('gurumapel')
-            // ->join('guru', 'gurumapel.id_guru', '=', 'guru.id_guru')
-            ->join('mapel', 'gurumapel.id_mapel', '=', 'mapel.id_mapel')
-            ->select('mapel.nama_mapel', 'gurumapel.id_guru', 'mapel.id_mapel as id_mpl', 'kelas_mapel', 'jurusan_mapel')
-            ->get();
+        
         $guru = Guru::all();
         $mapel = Mapel::all();
-        return view('data_umum.guru_mapel.index', compact('gurumapel', 'guru', 'mapel'));
+        return view('data_umum.guru_mapel.index', compact('guru', 'mapel'));
     }
 
     public function store(Request $request)

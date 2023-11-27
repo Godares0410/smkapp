@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('jenis_ujian', function (Blueprint $table) {
             $table->increments('id_jenis');
-            $table->string('kode_ujian');
             $table->string('nama_ujian');
             $table->timestamps();
         });

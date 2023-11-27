@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('bank_ujian', function (Blueprint $table) {
             $table->increments('id_bank_ujian');
-            $table->string('nama_bank_ujian');
-            $table->integer('id_mapel');
-            $table->integer('id_bank_soal');
+            $table->integer('id_jenis');
             $table->integer('id_kelas');
-            $table->integer('id_jurusan');
-            $table->integer('durasi');
+            $table->integer('id_mapel');
+            $table->json('id_bank_soal');
+            $table->json('id_jurusan');
+            // $table->integer('durasi');
             $table->integer('jumlah_soal');
+            $table->integer('jumlah_opsi');
             $table->integer('acak_soal');
             $table->integer('acak_jawaban');
+            $table->timestamps();
         });
     }
 

@@ -17,8 +17,6 @@ return new class extends Migration
             $table->increments('id_bank_soal');
             $table->string('nama_bank_soal');
             $table->integer('id_mapel');
-            $table->integer('kelas');
-            $table->integer('jurusan');
             $table->timestamps();
         });
     }

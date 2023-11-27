@@ -82,8 +82,8 @@
                             <tr>
                                 <td>{{ $counter++ }}</td>
                                 <td>{{ $data->nama_siswa }}</td>
-                                <td>{{ $data->kelas }}</td>
-                                <td>{{ $data->jurusan }}</td>
+                                <td>{{ $data->nama_kelas }}</td>
+                                <td>{{ $data->nama_jurusan }}</td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal"
                                         data-target="#modalEdit{{ $data->id_siswa }}">

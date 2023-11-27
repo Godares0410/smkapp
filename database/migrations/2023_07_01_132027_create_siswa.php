@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->increments('id_siswa');
             $table->string('nama_siswa');
-            $table->string('kelas');
-            $table->string('jurusan');
-            $table->string('rombel');
+            $table->integer('id_kelas');
+            $table->integer('id_jurusan');
+            $table->integer('id_rombel');
             $table->string('username');
             $table->string('password');
             $table->string('foto')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

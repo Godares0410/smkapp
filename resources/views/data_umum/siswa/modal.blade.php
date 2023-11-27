@@ -22,7 +22,7 @@
                         <label for="kelas">Kelas</label>
                         <select class="form-control" id="kelas" name="kelas" required>
                             @foreach ($kelas as $kls)
-                                <option value="{{ $kls->nama_kelas }}">{{ $kls->nama_kelas }}</option>
+                                <option value="{{ $kls->id_kelas }}">{{ $kls->nama_kelas }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -30,12 +30,17 @@
                         <label for="jurusan">Jurusan</label>
                         <select class="form-control" id="jurusan" name="jurusan" required>
                             @foreach ($jurusan as $jrs)
-                                <option value="{{ $jrs->kode_jurusan }}">{{ $jrs->kode_jurusan }}</option>
+                                <option value="{{ $jrs->id_jurusan }}">{{ $jrs->kode_jurusan }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="rombel" name="rombel" required>
+                        <label for="username">User Name</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-group">
                         <label for="foto">Foto</label>
@@ -76,7 +81,7 @@
                             <label for="kelas">Kelas</label>
                             <select class="form-control" id="kelas" name="kelas" required>
                                 @foreach ($kelas as $kls)
-                                    <option value="{{ $kls->nama_kelas }}">{{ $kls->nama_kelas }}</option>
+                                    <option value="{{ $kls->id_kelas }}">{{ $kls->nama_kelas }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,12 +89,18 @@
                             <label for="jurusan">Jurusan</label>
                             <select class="form-control" id="jurusan" name="jurusan" required>
                                 @foreach ($jurusan as $jrs)
-                                    <option value="{{ $jrs->kode_jurusan }}">{{ $jrs->kode_jurusan }}</option>
+                                    <option value="{{ $jrs->id_jurusan }}">{{ $jrs->kode_jurusan }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="rombel" name="rombel" required>
+                            <label for="username">User Name</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                value="{{ $data->username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                                <input type="text" class="form-control" id="password" name="password">
                         </div>
                         <div class="form-group">
                             <label for="foto">Foto</label>

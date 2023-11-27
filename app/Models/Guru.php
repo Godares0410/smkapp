@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
-class Guru extends Model
+class Guru extends Model implements Authenticatable
 {
+    use AuthenticableTrait;
     use HasFactory;
 
-    protected $fillable = ['nama_guru', 'jabatan','foto'];
+    protected $guarded = 'id_guru';
     protected $table = 'guru';
+    protected $primaryKey = 'id_guru';
 
     // public function kelas()
     // {

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ujian;
-use App\Models\BankSoal;
+use App\Models\Makanan;
 use Illuminate\Http\Request;
 
-class UjianController extends Controller
+class MakananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,11 @@ class UjianController extends Controller
      */
     public function index()
     {
-        $ujian = Ujian::all();
-        $soal = BankSoal::query()->where('id_mapel', 1)->take(60)->select('id_soal', 'id_mapel', 'soal', 'pil_a', 'pil_b', 'pil_c', 'pil_d', 'pil_e', 'file_1')->get();
-        return view('ujian.index', compact('soal'));
+        $tipeMakanan = request('tipe_makanan'); // Ambil parameter 'tipe_makanan' dari URL
+        $makanans = Makanan::when($tipeMakanan, function ($query) use ($tipeMakanan) {
+            return $query->whereJsonContains('tipe_makanan', $tipeMakanan);
+        })->get();
+        return view('test.test', compact('makanans'));
     }
 
     /**
@@ -38,7 +39,25 @@ class UjianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Validasi formulir
+         $request->validate([
+            'nama_makanan' => 'required|string|max:255',
+            'tipe_makanan' => 'required|array',
+        ]);
+
+        // Mengonversi array ke dalam format yang sesuai untuk penyimpanan
+        $tipeMakanan = json_encode($request->tipe_makanan);
+
+        // Proses penyimpanan data
+        $makanan = new Makanan([
+            'nama_makanan' => $request->nama_makanan,
+            'tipe_makanan' => $tipeMakanan,
+        ]);
+
+        $makanan->save();
+
+        // Tampilkan pesan sukses
+        return "Data Makanan berhasil disimpan!";
     }
 
     /**

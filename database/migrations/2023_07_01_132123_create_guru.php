@@ -17,6 +17,8 @@ return new class extends Migration
             $table->increments('id_guru');
             $table->string('nama_guru');
             $table->string('jabatan');
+            $table->string('username');
+            $table->string('password');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

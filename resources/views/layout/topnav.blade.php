@@ -232,7 +232,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('AdminLTE-2/dist/img/user2-160x160.jpg') }}" class="user-image"
                             alt="User Image">
-                        <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                        {{-- <span class="hidden-xs">{{ auth()->user()->name }}</span> --}}
+                        @if (auth()->check())
+                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                        @elseif (auth('guru')->check())
+                            <span class="hidden-xs">{{ auth('guru')->user()->nama_guru }}</span>
+                        @elseif (auth('siswa')->check())
+                            <span class="hidden-xs">{{ auth('siswa')->user()->nama_siswa }}</span>
+                    @endif
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -240,10 +247,24 @@
                             <img src="{{ asset('AdminLTE-2/dist/img/user2-160x160.jpg') }}" class="img-circle"
                                 alt="User Image">
 
-                            <p>
-                                {{ auth()->user()->name }} - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
+                            @if (auth('web')->check())
+                                @php
+                                    $nama = auth()->user()->name;
+                                @endphp
+                            @elseif (auth('siswa')->check())
+                                @php
+                                    $nama = auth('siswa')->user()->nama_siswa;
+                                @endphp
+                            @elseif (auth('guru')->check())
+                                @php
+                                    $nama = auth('guru')->user()->nama_guru;
+                                @endphp
+                            @else
+                                @php
+                                    $nama = 'tidak ada nama';
+                                @endphp
+                            @endif
+                            <p>{{ $nama }}</p>
                         </li>
                         <!-- Menu Body -->
                         <li class="user-body">

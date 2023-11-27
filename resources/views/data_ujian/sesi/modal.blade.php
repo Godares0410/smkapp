@@ -24,12 +24,14 @@
                     <!-- Select untuk Jam -->
                     <div class="bootstrap-timepicker">
                         <div class="form-group">
-                            <input type="text" name="mulai" class="form-control timepicker">
+                            <label for="mulai">Jam Mulai</label>
+                            <input type="time" name="mulai" class="form-control timepicker">
                         </div>
                     </div>
                     <div class="bootstrap-timepicker">
                         <div class="form-group">
-                            <input type="text" name="sampai" class="form-control timepicker">
+                            <label for="sampai">Jam Berakhir</label>
+                            <input type="time" name="sampai" class="form-control timepicker">
                         </div>
                     </div>
             </div>
@@ -71,13 +73,15 @@
                         <!-- Select untuk Jam -->
                         <div class="bootstrap-timepicker">
                             <div class="form-group">
-                                <input type="text" name="mulai" class="form-control timepicker"
+                                <label for="mulai">Jam Mulai</label>
+                                <input type="time" name="mulai" class="form-control timepicker"
                                     value="{{ $data->mulai }}">
                             </div>
                         </div>
                         <div class="bootstrap-timepicker">
                             <div class="form-group">
-                                <input type="text" name="sampai" class="form-control timepicker" value="{{ $data->sampai }}">
+                                <label for="sampai">Jam Mulai</label>
+                                <input type="time" name="sampai" class="form-control timepicker" value="{{ $data->sampai }}">
                             </div>
                         </div>
                 </div>

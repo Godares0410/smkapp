@@ -64,7 +64,7 @@
             @if (session('gagal'))
                 <script>
                     Swal.fire({
-                        icon: 'gagal',
+                        icon: 'error',
                         title: 'Gagal!',
                         text: '{{ session('gagal') }}',
                         showConfirmButton: true
