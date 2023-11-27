@@ -21,6 +21,8 @@ class GuruFactory extends Factory
         $faker = faker::create();
         return [
             'nama_guru' => $faker->name(),
+            'username' => $faker->word(),
+            'password' => $faker->word(),
             'jabatan' => $faker->firstName(),
         ];
     }

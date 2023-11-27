@@ -68,22 +68,54 @@
                             <th>Kode Mapel</th>
                             <th>Kelas</th>
                             <th>Jurusan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $counter = 1;
                         @endphp
+                        {{-- @dd($mapel) --}}
                         @foreach ($mapel as $data)
                             <tr>
                                 <td>{{ $counter++ }}</td>
                                 <td>{{ $data->nama_mapel }}</td>
                                 <td>{{ $data->kode_mapel }}</td>
-                                <td>{{ $data->nama_kelas }}</td>
-                                <td>{{ $data->jurusan_mapel }}</td>
+                                @php
+                                    $id = $data->id_kelas;
+                                    $keles = \App\Models\Kelas::whereIn('id_kelas', [$id])
+                                        ->pluck('nama_kelas')
+                                        ->first();
+                                @endphp
+
+                                <td>{{ $keles }}</td>
+
+                                {{-- Retrieve kode_jurusan values based on id_jurusan --}}
+                                @php
+                                    $decodedIdJurusanValues = json_decode($data->id_jurusan, true);
+                                    $matchingKodeJurusanValues = \App\Models\Jurusan::whereIn('id_jurusan', $decodedIdJurusanValues)
+                                        ->pluck('kode_jurusan')
+                                        ->toArray();
+                                @endphp
+                                <td>
+                                    @foreach ($matchingKodeJurusanValues as $index => $kodeJurusan)
+                                        {{ $kodeJurusan }}
+
+                                        @if ($index < count($matchingKodeJurusanValues) - 1)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#modalEdit{{ $data->id_mapel }}">
+                                        Edit
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -120,13 +152,11 @@
             });
         });
 
-        // JavaScript untuk mengontrol checkbox "Select All"
-        // var selectAll = document.getElementById("selectAll");
-        // var checkboxes = document.querySelectorAll('input[name="jurusan_mapel[]"]');
-        // selectAll.addEventListener("change", function() {
-        //     checkboxes.forEach(function(checkbox) {
-        //         checkbox.checked = selectAll.checked;
-        //     });
-        // });
+        document.getElementById('selectAll').addEventListener('change', function() {
+            var checkboxes = document.querySelectorAll('input[name="jurusan_mapel[]"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = document.getElementById('selectAll').checked;
+            });
+        });
     </script>
 @endpush

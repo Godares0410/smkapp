@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('mapel', function (Blueprint $table) {
             $table->increments('id_mapel');
-            $table->string('nama_mapel');
             $table->string('kode_mapel');
-            $table->string('nama_kelas');
+            $table->string('nama_mapel');
+            $table->integer('id_kelas');
+            $table->json('id_jurusan')->default(null);
             $table->timestamps();
         });
     }

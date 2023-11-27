@@ -24,9 +24,9 @@ class SiswaFactory extends Factory
         $jurusan = Arr::random(['DKV', 'KPR', 'TSM']);
         return [
             'nama_siswa' => $faker->name(),
-            'kelas' => $kelas,
-            'jurusan' => $jurusan,
-            'rombel' => $kelas . ' ' . $jurusan,
+            'id_kelas' => $faker->numberBetween(1, 3),
+            'id_jurusan' => $faker->numberBetween(1, 3),
+            'id_rombel' => $faker->numberBetween(1, 3),
             'username' => $faker->word(),
             'password' => $faker->numberBetween(1000, 9999),
         ];

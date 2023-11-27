@@ -3,7 +3,7 @@
 {{-- <div class="modal fade" id="modal-form" tabindex="-1" role="dialog"> --}}
 <div class="modal fade" id="modalTambahBankSoal" tabindex="-1" role="dialog" aria-labelledby="modalTambahBankSoalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -21,18 +21,41 @@
                         <label for="kelas">Kelas</label>
                         <select class="form-control" id="kelas" name="kelas" required>
                             @foreach ($kelas as $kls)
-                                <option value="{{ $kls->nama_kelas }}">{{ $kls->nama_kelas }}</option>
+                                <option value="{{ $kls->id_kelas }}">{{ $kls->nama_kelas }}</option>
                             @endforeach
                         </select>
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="jurusan">Jurusan</label>
-                        <select class="form-control" id="jurusan" name="jurusan" required>
-                            @foreach ($jurusan as $jrs)
-                                <option value="{{ $jrs->kode_jurusan }}">{{ $jrs->kode_jurusan }}</option>
+                    <div class="form-group">
+                        <label for="mapel">Mapel</label>
+                        <select class="form-control" id="mapel" name="mapel" required>
+                            <option value="pilih_kelas">Pilih Mapel</option>
+                            @foreach ($mapel as $mpl)
+                                @php
+                                    $decodedIdJurusanValues = json_decode($mpl->id_jurusan, true);
+                                    $matchingKodeJurusanValues = \App\Models\Jurusan::whereIn('id_jurusan', $decodedIdJurusanValues)
+                                        ->pluck('kode_jurusan')
+                                        ->toArray();
+                                @endphp
+                                <option class="mapel-option" value="{{ $mpl->id_mapel }}"
+                                    data-kelas="{{ $mpl->id_kelas }}">
+                                    {{ $mpl->nama_mapel }} (
+                                    @foreach ($matchingKodeJurusanValues as $index => $kodeJurusan)
+                                        {{ $kodeJurusan }}
+                                        @if ($index < count($matchingKodeJurusanValues) - 1)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                    )
+                                </option>
                             @endforeach
                         </select>
-                    </div> --}}
+                    </div>
+                    {{-- <label for="jurusan_mapel">Jurusan Mapel:</label><br> --}}
+                    <input type="checkbox" id="selectAll" style="display: none">
+                    @foreach ($jurusan as $jurusan_item)
+                        <input type="checkbox" name="jurusan_mapel[]" value="{{ $jurusan_item->id_jurusan }}"
+                            style="display: none">
+                    @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
